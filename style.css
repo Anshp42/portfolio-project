@@ -1,0 +1,33 @@
+/* Layout rules for project links and media buttons */
+.project-links-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.project-links-footer .btn, 
+.project-links-footer .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.media-link-wrapper {
+    text-decoration: none;
+    display: block;
+}
+
+.media-link-wrapper:hover .media-placeholder {
+    background-color: #cbd5e1;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.icon, .play-icon, .photo-icon {
+    font-style: normal;
+}
