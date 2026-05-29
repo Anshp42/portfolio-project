@@ -3,142 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio | Projects</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ansh P. — Computer Information Systems Portfolio</title>
+    <meta name="description" content="Portfolio of Ansh P., a Computer Information Systems student and software engineer building applications across desktop, web, and algorithmic tiers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+    <style>
+  
+    :root {
+        --bg:          #100f0d;
+        --surface:     #181613;
+        --surface-2:   #201d18;
+        --text:        #f3efe6;
+        --muted:       #989183;
+        --faint:       #6a6459;
+        --accent:      #f0a830;
+        --accent-soft: #f7c873;
+        --border-color:rgba(243, 239, 230, 0.10);
+        --border-strong:rgba(243, 239, 230, 0.18);
+        --maxw: 1120px;
+        --radius: 14px;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+        --font-body: "Newsreader", Georgia, serif;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 1.075rem;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+        position: relative;
+    }
+    body::before {
+        content: ""; position: fixed; inset: 0; z-index: -2;
+        background-image:
+            linear-gradient(var(--border-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+        background-size: 64px 64px;
+        -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
+                mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
+        opacity: 0.5;
+    }
+    body::after {
+        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background:
+            radial-gradient(700px 400px at 85% -5%, rgba(240,168,48,0.10), transparent 70%),
+            radial-gradient(600px 500px at 0% 100%, rgba(240,168,48,0.05), transparent 70%);
+    }
+    header {
+        position: sticky; top: 0; z-index: 50;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.1rem clamp(1.25rem, 5vw, 3.5rem);
+        backdrop-filter: blur(14px);
+        background: rgba(16, 15, 13, 0.72);
+        border-bottom: 1px solid var(--border-color);
+    }
+    .logo {
+        font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem;
+        letter-spacing: 0.02em; color: var(--text); cursor: pointer;
+        background: none; border: none;
+    }
+    .logo::before { content: "◆ "; color: var(--accent); }
+    nav { display: flex; gap: 0.4rem; }
+    nav a {
+        font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.01em;
+        color: var(--muted); text-decoration: none; cursor: pointer;
+        padding: 0.45rem 0.85rem; border-radius: 8px;
+        transition: color 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    nav a:hover { color: var(--text); background: var(--surface-2); }
+    nav a.active { color: var(--accent); }
+    nav a.active::before { content: "/ "; color: var(--faint); }
+    main {
+        max-width: var(--maxw); margin: 0 auto;
+        padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3.5rem) 5rem;
+    }
+    .page { display: none; }
+    .page.is-active { display: block; }
+    .page-title { margin-bottom: 3.5rem; }
+    .eyebrow {
+        font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em;
+        text-transform: uppercase; color: var(--accent);
+        display: inline-block; margin-bottom: 1.1rem;
+    }
+    h1 {
+        font-family: var(--font-display); font-weight: 700;
+        font-size: clamp(2.6rem, 7vw, 5rem); line-height: 0.98; letter-spacing: -0.03em;
+    }
+    h2 {
+        font-family: var(--font-display); font-weight: 600;
+        font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.12; letter-spacing: -0.02em;
+    }
+    h3 {
+        font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem;
+        letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-soft);
+        margin: 1.6rem 0 0.5rem;
+    }
+    .lead {
+        font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.55;
+        color: var(--muted); max-width: 60ch; margin-top: 1.4rem;
+    }
+    p { color: #d9d3c7; }
+    a { color: var(--accent); }
+    .hero {
+        padding: clamp(2rem, 6vw, 4.5rem) 0 clamp(3rem, 7vw, 5rem);
+        border-bottom: 1px solid var(--border-color); margin-bottom: 4rem;
+    }
+    .hero h1 { font-size: clamp(3rem, 10vw, 7rem); }
+    .hero .name-accent { color: var(--accent); }
+    .hero .lead { max-width: 54ch; }
+    .status-line {
+        display: inline-flex; align-items: center; gap: 0.6rem;
+        font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted);
+        margin-bottom: 1.5rem;
+    }
+    .status-dot {
+        width: 8px; height: 8px; border-radius: 50%; background: #5dd06f;
+        box-shadow: 0 0 0 0 rgba(93,208,111,0.6); animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(93,208,111,0.55); }
+        70%  { box-shadow: 0 0 0 9px rgba(93,208,111,0); }
+        100% { box-shadow: 0 0 0 0 rgba(93,208,111,0); }
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
+    .btn, .btn-secondary {
+        font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.02em;
+        text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 10px;
+        transition: transform 0.25s var(--ease), background 0.25s var(--ease),
+                    border-color 0.25s var(--ease), color 0.25s var(--ease);
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        border: 1px solid transparent; cursor: pointer;
+    }
+    .btn { background: var(--accent); color: #1a1206; font-weight: 600; }
+    .btn:hover { background: var(--accent-soft); transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .section { margin: 4.5rem 0; }
+    .section-label {
+        font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.16em;
+        text-transform: uppercase; color: var(--faint); margin-bottom: 1.6rem;
+        display: flex; align-items: center; gap: 0.9rem;
+    }
+    .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
+    .feature-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;
+    }
+    .feature {
+        background: var(--surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius); padding: 1.6rem;
+        transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+    }
+    .feature:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+    .feature .num { font-family: var(--font-mono); color: var(--accent); font-size: 0.85rem; }
+    .feature h2 { font-size: 1.25rem; margin: 0.7rem 0 0.5rem; }
+    .feature p { color: var(--muted); font-size: 0.98rem; line-height: 1.6; }
+    .stack-groups { display: grid; gap: 1.6rem; }
+    .stack-group h3 { margin-top: 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.6rem; }
+    .tag {
+        font-family: var(--font-mono); font-size: 0.8rem; color: #d9d3c7;
+        background: var(--surface-2); border: 1px solid var(--border-color);
+        padding: 0.4rem 0.8rem; border-radius: 999px;
+        transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .project-card {
+        position: relative; background: var(--surface);
+        border: 1px solid var(--border-color); border-radius: var(--radius);
+        padding: clamp(1.6rem, 4vw, 2.5rem); margin-bottom: 1.75rem;
+        overflow: hidden;
+        transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .project-card::before {
+        content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+        background: var(--accent); transform: scaleY(0); transform-origin: top;
+        transition: transform 0.4s var(--ease);
+    }
+    .project-card:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+    .project-card:hover::before { transform: scaleY(1); }
+    .project-card h2 { font-size: clamp(1.35rem, 2.6vw, 1.85rem); padding-right: 1rem; }
+    .project-meta {
+        font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted);
+        margin: 0.9rem 0 0.5rem; line-height: 1.6;
+    }
+    .project-meta strong { color: var(--accent-soft); font-weight: 600; }
+    .project-card p { font-size: 1rem; line-height: 1.65; color: #cfc9bc; }
+    .project-media { margin: 1.6rem 0 0.5rem; }
+    .media-placeholder {
+        background: var(--surface-2); border: 1px dashed var(--border-strong);
+        border-radius: 10px; color: var(--muted); font-family: var(--font-mono);
+        font-size: 0.85rem; padding: 2.2rem 1rem; text-align: center;
+        transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+    }
+    .play-icon { color: var(--accent); margin-right: 0.4rem; }
+    .project-links-footer {
+        display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;
+        padding-top: 1.5rem; border-top: 1px solid var(--border-color);
+    }
+    .project-links-footer .btn, .project-links-footer .btn-secondary {
+        display: inline-flex; align-items: center; gap: 0.5rem; margin: 0;
+    }
+    .media-link-wrapper { text-decoration: none; display: block; }
+    .media-link-wrapper:hover .media-placeholder {
+        background-color: var(--surface); border-color: var(--accent);
+        color: var(--accent); cursor: pointer;
+    }
+    .icon, .play-icon, .photo-icon { font-style: normal; }
+    .resume-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (min-width: 820px) {
+        .resume-grid { grid-template-columns: 1.4fr 1fr; gap: 3.5rem; }
+    }
+    .timeline-item {
+        border-left: 1px solid var(--border-color);
+        padding: 0 0 1.8rem 1.5rem; position: relative;
+    }
+    .timeline-item::before {
+        content: ""; position: absolute; left: -5px; top: 6px;
+        width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item .when { font-family: var(--font-mono); font-size: 0.78rem; color: var(--faint); }
+    .timeline-item h2 { font-size: 1.2rem; margin: 0.2rem 0; }
+    .timeline-item .where { color: var(--muted); font-size: 0.95rem; }
+    .timeline-item p { font-size: 0.97rem; margin-top: 0.5rem; }
+    .contact-card {
+        background: var(--surface); border: 1px solid var(--border-color);
+        border-radius: var(--radius); padding: 1.8rem;
+    }
+    .contact-card h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .contact-list { list-style: none; display: grid; gap: 0.4rem; }
+    .contact-list a, .contact-list span {
+        font-family: var(--font-mono); font-size: 0.9rem; color: #d9d3c7;
+        text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+        padding: 0.45rem 0; transition: color 0.25s var(--ease);
+    }
+    .contact-list a:hover { color: var(--accent); }
+    .contact-list .k { color: var(--faint); min-width: 5.5rem; }
+    footer {
+        max-width: var(--maxw); margin: 0 auto;
+        padding: 2rem clamp(1.25rem, 5vw, 3.5rem) 3rem;
+        border-top: 1px solid var(--border-color); color: var(--faint);
+        font-family: var(--font-mono); font-size: 0.8rem;
+        display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+    }
+    @keyframes rise {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .page.is-active .reveal { opacity: 0; animation: rise 0.8s var(--ease) forwards; }
+    .page.is-active .reveal:nth-child(1) { animation-delay: 0.05s; }
+    .page.is-active .reveal:nth-child(2) { animation-delay: 0.15s; }
+    .page.is-active .reveal:nth-child(3) { animation-delay: 0.25s; }
+    .page.is-active .reveal:nth-child(4) { animation-delay: 0.35s; }
+    .page.is-active .reveal:nth-child(5) { animation-delay: 0.45s; }
+    .page.is-active .reveal:nth-child(6) { animation-delay: 0.55s; }
+    @media (prefers-reduced-motion: reduce) {
+        .reveal { animation: none !important; opacity: 1 !important; }
+        .status-dot { animation: none; }
+        html { scroll-behavior: auto; }
+    }
+    @media (max-width: 560px) {
+        header { flex-direction: column; gap: 0.75rem; padding: 0.9rem 1.25rem; }
+        nav { flex-wrap: wrap; justify-content: center; }
+        footer { flex-direction: column; }
+    }
+    </style>
 </head>
 <body>
 
+    <!-- TODO: replace "Ansh P." with your full name everywhere it appears -->
     <header>
-        <strong class="logo">CIS Portfolio</strong>
+        <button class="logo" data-nav="about">CIS Portfolio</button>
         <nav>
-            <a href="index.html">About Me</a>
-            <a href="projects.html" class="active">Projects</a>
-            <a href="resume.html">Resume & Contact</a>
+            <a class="active" data-nav="about">About Me</a>
+            <a data-nav="projects">Projects</a>
+            <a data-nav="resume">Resume &amp; Contact</a>
         </nav>
     </header>
 
     <main>
-        <section class="page-title">
-            <h1>Technical Project Showcase</h1>
-            <p class="lead">A curated selection of engineering projects demonstrating versatility across different computing tiers.</p>
+
+        <!-- ================= ABOUT ================= -->
+        <section class="page is-active" id="about">
+            <div class="hero">
+                <span class="status-line reveal">
+                    <span class="status-dot"></span> Open to internships &amp; software engineering roles
+                </span>
+                <h1 class="reveal">Hi, I'm <span class="name-accent">Ansh</span>.<br>I build things that run.</h1>
+                <p class="lead reveal">
+                    A Computer Information Systems student and software engineer working across
+                    three computing tiers — interactive desktop applications, algorithmic systems,
+                    and responsive web interfaces. I care about clean architecture, measurable
+                    performance, and code that holds up in the real world.
+                </p>
+                <div class="cta-row reveal">
+                    <a class="btn" data-nav="projects"><span class="icon">▦</span> View Projects</a>
+                    <a class="btn-secondary" data-nav="resume"><span class="icon">✦</span> Resume &amp; Contact</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-label reveal">01 — What I focus on</div>
+                <div class="feature-grid">
+                    <div class="feature reveal">
+                        <span class="num">/ desktop</span>
+                        <h2>Application Engineering</h2>
+                        <p>Object-oriented desktop apps in Java &amp; Python — separating data logic from presentation so interfaces stay fast and never freeze.</p>
+                    </div>
+                    <div class="feature reveal">
+                        <span class="num">/ systems</span>
+                        <h2>Algorithmic Logic</h2>
+                        <p>Simulation loops, state machines, and matrix evaluation built around efficient data structures and predictable, low-overhead execution.</p>
+                    </div>
+                    <div class="feature reveal">
+                        <span class="num">/ web</span>
+                        <h2>Responsive Frontend</h2>
+                        <p>Mobile-first interfaces using modern CSS layout and modular architecture that hold their alignment across every viewport.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-label reveal">02 — Toolbox</div>
+                <div class="stack-groups">
+                    <div class="stack-group reveal">
+                        <h3>Languages</h3>
+                        <div class="tags">
+                            <span class="tag">Python</span><span class="tag">Java</span>
+                            <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+                        </div>
+                    </div>
+                    <div class="stack-group reveal">
+                        <h3>Frameworks &amp; Libraries</h3>
+                        <div class="tags">
+                            <span class="tag">Pygame</span><span class="tag">JavaFX</span>
+                            <span class="tag">CSS Grid / Flexbox</span>
+                        </div>
+                    </div>
+                    <div class="stack-group reveal">
+                        <h3>Concepts &amp; Tools</h3>
+                        <div class="tags">
+                            <span class="tag">Object-Oriented Design</span><span class="tag">Data Structures</span>
+                            <span class="tag">Game Logic</span><span class="tag">Git / Version Control</span>
+                            <span class="tag">Responsive Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <article class="project-card">
-            <h2>Project 1: Interactive Desktop Application - Deadly Desert Lab</h2>
-            <div class="project-meta">
-                <strong>Technical Stack:</strong> Python, Pygame, Object-Oriented Logic, Version Control
+        <!-- ================= PROJECTS ================= -->
+        <section class="page" id="projects">
+            <div class="page-title">
+                <span class="eyebrow reveal">Selected Work</span>
+                <h1 class="reveal">Technical Project Showcase</h1>
+                <p class="lead reveal">A curated selection of engineering projects demonstrating versatility across desktop, algorithmic, and web computing tiers.</p>
             </div>
-            
-            <h3>Problem Statement</h3>
-            <p>Developing engaging, logic-driven simulation loops requires efficient collision detection, state management, and real-time asset rendering without introducing CPU processing bottlenecks.</p>
 
-            <h3>Process & Reflection</h3>
-            <p>I designed this system by separating rendering surfaces from the core simulation logic loops. A significant challenge was optimizing the asset calculation updates to prevent frame drops during complex interactions. By refactoring the update cycle to utilize delta-time rendering and tracking coordinates via structural vectors, I achieved stable, cross-platform performance execution.</p>
+            <article class="project-card reveal">
+                <div class="project-meta"><strong>Project 01</strong> — Interactive Desktop Application</div>
+                <h2>Deadly Desert Lab</h2>
+                <div class="project-meta"><strong>Stack:</strong> Python · Pygame · Object-Oriented Logic · Version Control</div>
+                <h3>Problem Statement</h3>
+                <p>Developing engaging, logic-driven simulation loops requires efficient collision detection, state management, and real-time asset rendering without introducing CPU processing bottlenecks.</p>
+                <h3>Process &amp; Reflection</h3>
+                <p>I designed this system by separating rendering surfaces from the core simulation logic loops. A significant challenge was optimizing the asset calculation updates to prevent frame drops during complex interactions. By refactoring the update cycle to utilize delta-time rendering and tracking coordinates via structural vectors, I achieved stable, cross-platform performance execution.</p>
+                <div class="project-media">
+                    <a href="#" class="media-link-wrapper" target="_blank">
+                        <div class="media-placeholder"><span class="play-icon">▶</span> Watch Application Simulation / Demonstration</div>
+                    </a>
+                </div>
+                <div class="project-links-footer">
+                    <a href="https://github.com/Anshp42/Deadly-desert-lab" class="btn" target="_blank"><span class="icon">📁</span> View Source Code</a>
+                    <a href="https://github.com/Anshp42/Deadly-desert-lab" class="btn-secondary" target="_blank"><span class="icon">⚡</span> Explore Repository</a>
+                </div>
+            </article>
 
-            <div class="project-media">
-                <a href="#" class="media-link-wrapper" target="_blank">
-                    <div class="media-placeholder">
-                        <span class="play-icon">▶</span> [ Watch Application Simulation / Demonstration ]
+            <article class="project-card reveal">
+                <div class="project-meta"><strong>Project 02</strong> — Algorithmic Matrix Engine</div>
+                <h2>Tic-Tac-Toe Simulation</h2>
+                <div class="project-meta"><strong>Stack:</strong> Python · Multidimensional Arrays · Game Theory &amp; State Verification</div>
+                <h3>Problem Statement</h3>
+                <p>Building local turn-based systems requires reliable grid evaluation state machines that can parse multi-directional coordinate matching paths efficiently without redundant memory consumption.</p>
+                <h3>Process &amp; Reflection</h3>
+                <p>I structured this solution around multi-dimensional data structures representing coordinate layouts. The fundamental challenge was establishing clean conditional validation routes to sweep rows, columns, and diagonal trajectories after every input tick. I resolved this by utilizing deterministic loop structures to systematically scan matrix slices, reducing computational overhead and ensuring crisp, real-time index evaluation values.</p>
+                <div class="project-media">
+                    <a href="#" class="media-link-wrapper" target="_blank">
+                        <div class="media-placeholder"><span class="play-icon">▶</span> View Grid State Matrix Demo Run</div>
+                    </a>
+                </div>
+                <div class="project-links-footer">
+                    <a href="https://github.com/Anshp42/tic-tac-toe" class="btn" target="_blank"><span class="icon">📁</span> View Source Code</a>
+                    <a href="https://github.com/Anshp42/tic-tac-toe" class="btn-secondary" target="_blank"><span class="icon">⚡</span> Explore Repository</a>
+                </div>
+            </article>
+
+            <article class="project-card reveal">
+                <div class="project-meta"><strong>Project 03</strong> — Object-Oriented Desktop Application</div>
+                <h2>Inventory Management System</h2>
+                <div class="project-meta"><strong>Stack:</strong> Java · JavaFX UI Framework · Object-Oriented Programming</div>
+                <h3>Problem Statement</h3>
+                <p>Small-scale logistics businesses need an intuitive, fast-loading visual application interface to update, track, and categorize warehouse asset stock metrics locally.</p>
+                <h3>Process &amp; Reflection</h3>
+                <p>This system was built leveraging strong Object-Oriented principles, using custom model classes for stock components. Managing cross-window UI updates without introducing thread blocking proved difficult. By restructuring the software interface to separate the data logic from presentation classes, I successfully streamlined performance and eliminated interface freezing.</p>
+                <div class="project-media">
+                    <div class="media-placeholder">UI Interface Screenshot Assembly</div>
+                </div>
+                <div class="project-links-footer">
+                    <a href="https://github.com/MCST-CIS/java-portfolio-project-ch-1-6-Anshp42" class="btn" target="_blank"><span class="icon">📁</span> View Repository</a>
+                    <a href="https://github.com/MCST-CIS/java-portfolio-project-ch-1-6-Anshp42/tree/main" class="btn-secondary" target="_blank"><span class="icon">💻</span> Explore Source Files</a>
+                </div>
+            </article>
+
+            <article class="project-card reveal">
+                <div class="project-meta"><strong>Project 04</strong> — Web Application</div>
+                <h2>Congressional App Challenge Application</h2>
+                <div class="project-meta"><strong>Stack:</strong> HTML5 · CSS3 Grid/Flexbox · JavaScript · Modular Design Architecture</div>
+                <h3>Problem Statement</h3>
+                <p>Technical professionals require a clean, responsive, fast-loading digital interface to convey engineering capabilities directly to prospective recruiters and stakeholders.</p>
+                <h3>Process &amp; Reflection</h3>
+                <p>I approached this architecture with a mobile-first philosophy, utilizing responsive CSS units rather than fixed layouts. Debugging multi-device alignment irregularities required a structured use of responsive media queries. Overcoming visual discrepancies across alternative engine runtimes enhanced my core frontend configuration skills.</p>
+                <div class="project-media">
+                    <div class="media-placeholder">Site Layout — Responsive Viewports Diagram</div>
+                </div>
+                <div class="project-links-footer">
+                    <a href="https://github.com/MCST-CIS/congressional-app-challenege-bus-boys" class="btn" target="_blank"><span class="icon">📁</span> View Repository</a>
+                    <a href="https://github.com/MCST-CIS/congressional-app-challenege-bus-boys" class="btn-secondary" target="_blank"><span class="icon">🌐</span> Launch Application Portal</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- ================= RESUME ================= -->
+        <section class="page" id="resume">
+            <div class="page-title">
+                <span class="eyebrow reveal">Background</span>
+                <h1 class="reveal">Resume &amp; Contact</h1>
+                <p class="lead reveal">A snapshot of my education, technical skill set, and the best ways to reach me. <!-- TODO: add a real PDF and link it below --></p>
+                <div class="cta-row reveal">
+                    <a href="#" class="btn"><span class="icon">⬇</span> Download Resume (PDF)</a>
+                    <a href="https://github.com/Anshp42" class="btn-secondary" target="_blank"><span class="icon">⌥</span> GitHub Profile</a>
+                </div>
+            </div>
+
+            <div class="resume-grid">
+                <div>
+                    <div class="section" style="margin-top:0">
+                        <div class="section-label reveal">Education</div>
+                        <div class="timeline-item reveal">
+                            <span class="when">Expected Graduation — Year</span>
+                            <h2>Computer Information Systems</h2>
+                            <span class="where">Your School / Program <!-- TODO: fill in school name --></span>
+                            <p>Coursework spanning object-oriented programming, data structures, algorithmic problem-solving, and full-stack web development. Built and shipped the projects featured in this portfolio as part of the program.</p>
+                        </div>
                     </div>
-                </a>
-            </div>
-
-            <div class="project-links-footer">
-                <a href="https://github.com/Anshp42/Deadly-desert-lab" class="btn" target="_blank">
-                    <span class="icon">📁</span> View Source Code on GitHub
-                </a>
-                <a href="https://github.com/Anshp42/Deadly-desert-lab" class="btn-secondary" target="_blank">
-                    <span class="icon">⚡</span> Explore Repository Files
-                </a>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <h2>Project 2: Algorithmic Matrix Engine - Tic-Tac-Toe Simulation</h2>
-            <div class="project-meta">
-                <strong>Technical Stack:</strong> Python, Multidimensional Arrays, Game Theory & State Verification
-            </div>
-            
-            <h3>Problem Statement</h3>
-            <p>Building local turn-based systems requires reliable grid evaluation state machines that can parse multi-directional coordinate matching paths efficiently without redundant memory consumption.</p>
-
-            <h3>Process & Reflection</h3>
-            <p>I structured this solution around multi-dimensional data structures representing coordinate layouts. The fundamental challenge was establishing clean conditional validation routes to sweep rows, columns, and diagonal trajectories after every input tick. I resolved this by utilizing deterministic loop structures to systematically scan matrix slices, reducing computational overhead and ensuring crisp, real-time index evaluation values.</p>
-
-            <div class="project-media">
-                <a href="#" class="media-link-wrapper" target="_blank">
-                    <div class="media-placeholder">
-                        <span class="play-icon">▶</span> [ View Grid State Matrix Demo Run ]
+                    <div class="section">
+                        <div class="section-label reveal">Selected Projects</div>
+                        <div class="timeline-item reveal">
+                            <span class="when">Python · Pygame</span>
+                            <h2>Deadly Desert Lab</h2>
+                            <span class="where">Interactive desktop simulation</span>
+                            <p>Delta-time rendering and vector-based coordinate tracking for stable, cross-platform performance.</p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <span class="when">Java · JavaFX</span>
+                            <h2>Inventory Management System</h2>
+                            <span class="where">Object-oriented desktop application</span>
+                            <p>Separated data logic from presentation classes to eliminate interface freezing and streamline performance.</p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <span class="when">HTML · CSS · JavaScript</span>
+                            <h2>Congressional App Challenge</h2>
+                            <span class="where">Responsive web application</span>
+                            <p>Mobile-first architecture with responsive media queries for consistent alignment across devices.</p>
+                        </div>
                     </div>
-                </a>
+                </div>
+
+                <div>
+                    <div class="section" style="margin-top:0">
+                        <div class="section-label reveal">Skills</div>
+                        <div class="stack-groups reveal">
+                            <div class="stack-group">
+                                <h3>Languages</h3>
+                                <div class="tags">
+                                    <span class="tag">Python</span><span class="tag">Java</span>
+                                    <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+                                </div>
+                            </div>
+                            <div class="stack-group">
+                                <h3>Frameworks</h3>
+                                <div class="tags">
+                                    <span class="tag">Pygame</span><span class="tag">JavaFX</span><span class="tag">Grid / Flexbox</span>
+                                </div>
+                            </div>
+                            <div class="stack-group">
+                                <h3>Practices</h3>
+                                <div class="tags">
+                                    <span class="tag">OOP</span><span class="tag">Data Structures</span>
+                                    <span class="tag">Git</span><span class="tag">Responsive Design</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-label reveal">Get in touch</div>
+                        <div class="contact-card reveal">
+                            <h2>Let's connect</h2>
+                            <ul class="contact-list">
+                                <!-- TODO: replace the placeholders below with your real details -->
+                                <li><a href="mailto:ansh13pat@gmail.com"><span class="k">Email</span> ansh13pat@gmail.com</a></li>
+                                <li><a href="https://github.com/Anshp42" target="_blank"><span class="k">GitHub</span> github.com/Anshp42</a></li>
+                                <li><a href="#" target="_blank"><span class="k">LinkedIn</span> linkedin.com/in/your-handle</a></li>
+                                <li><span><span class="k">Location</span> New York, US</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="project-links-footer">
-                <a href="https://github.com/Anshp42/tic-tac-toe" class="btn" target="_blank">
-                    <span class="icon">📁</span> View Source Code on GitHub
-                </a>
-                <a href="https://github.com/Anshp42/tic-tac-toe" class="btn-secondary" target="_blank">
-                    <span class="icon">⚡</span> Explore Repository Files
-                </a>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <h2>Project 3: Object-Oriented Inventory Desktop Application</h2>
-            <div class="project-meta">
-                <strong>Technical Stack:</strong> Java, JavaFX UI Framework, Object-Oriented Programming (OOP)
-            </div>
-            
-            <h3>Problem Statement</h3>
-            <p>Small-scale logistics businesses need an intuitive, fast-loading visual application interface to update, track, and categorize warehouse asset stock metrics locally.</p>
-
-            <h3>Process & Reflection</h3>
-            <p>This system was built leveraging strong Object-Oriented principles, using custom model classes for stock components. Managing cross-window UI updates without introducing thread blocking proved difficult. By restructuring the software interface to separate the data logic from presentation classes, I successfully streamlined performance and eliminated interface freezing.</p>
-
-            <div class="project-media">
-                <div class="media-placeholder">[ UI Interface Screenshot Assembly ]</div>
-            </div>
-
-            <div class="project-links-footer">
-                <a href="https://github.com/MCST-CIS/java-portfolio-project-ch-1-6-Anshp42" class="btn" target="_blank">
-                    <span class="icon">📁</span> View GitHub Repository
-                </a>
-                <a href="https://github.com/MCST-CIS/java-portfolio-project-ch-1-6-Anshp42/tree/main" class="btn-secondary" target="_blank">
-                    <span class="icon">💻</span> Explore Source Files
-                </a>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <h2>Project 4: Congressional App Challenge Application</h2>
-            <div class="project-meta">
-                <strong>Technical Stack:</strong> HTML5, CSS3 Grid/Flexbox, JavaScript, Modular Design Architecture
-            </div>
-            
-            <h3>Problem Statement</h3>
-            <p>Technical professionals require a clean, responsive, fast-loading digital interface to convey engineering capabilities directly to prospective recruiters and stakeholders.</p>
-
-            <h3>Process & Reflection</h3>
-            <p>I approached this architecture with a mobile-first philosophy, utilizing responsive CSS units rather than fixed layouts. Debugging multi-device alignment irregularities required a structured use of responsive media queries. Overcoming visual discrepancies across alternative engine runtimes enhanced my core frontend configuration skills.</p>
-
-            <div class="project-media">
-                <div class="media-placeholder">[ Site Layout Responsive Viewports Diagram ]</div>
-            </div>
-
-            <div class="project-links-footer">
-                <a href="https://github.com/MCST-CIS/congressional-app-challenege-bus-boys" class="btn" target="_blank">
-                    <span class="icon">📁</span> View Repository Code
-                </a>
-                <a href="https://github.com/MCST-CIS/congressional-app-challenege-bus-boys" class="btn-secondary" target="_blank">
-                    <span class="icon">🌐</span> Launch Application Portal
-                </a>
-            </div>
-        </article>
     </main>
 
     <footer>
-        <p>&copy; 2026 CIS Portfolio. Built for professional deployment.</p>
+        <span>&copy; 2026 Ansh P. — CIS Portfolio.</span>
+        <span>Built for professional deployment.</span>
     </footer>
+
+    <script>
+        const navTargets = document.querySelectorAll('[data-nav]');
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('nav a');
+
+        function showPage(id) {
+            pages.forEach(p => p.classList.toggle('is-active', p.id === id));
+            navLinks.forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+
+        navTargets.forEach(el => {
+            el.addEventListener('click', e => {
+                e.preventDefault();
+                showPage(el.dataset.nav);
+            });
+        });
+    </script>
 
 </body>
 </html>
