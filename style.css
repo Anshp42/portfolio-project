@@ -267,3 +267,12 @@ footer {
     nav { flex-wrap: wrap; justify-content: center; }
     footer { flex-direction: column; }
 }
+
+/* project screenshots */
+.project-shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+}
